@@ -31,28 +31,27 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-		 it('has a URL', function(){
-			for(var i=0; i<allFeeds.length; i++){
+		it('has a URL', function(){
+			for(var i = 0, len = allFeeds.length; i < len ; i++){
 				var url = allFeeds[i].url;
 				expect(url).toBeDefined();
-				expect(url).not.toBe("");
+				expect(url).not.toBe('');
 			}
-		 });
+		});
 
 
         /* This test loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-		 it('has a name', function(){
-			for(var i=0; i<allFeeds.length; i++){
+		it('has a name', function(){
+			for(var i = 0, len = allFeeds.length; i < len; i++){
 				var name = allFeeds[i].name;
 				expect(name).toBeDefined();
-				expect(name).not.toBe("");
+				expect(name).not.toBe('');
 			}
-		 });
-
-    });
+		});
+	});
 
 
     /* Test suite named "The menu" */
@@ -130,38 +129,23 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-		var textToBeChecked = "";
+		var oldText = "";
 		/*
 			Load the initial feed.
 		*/
 		beforeEach(function(done){
 			loadFeed(0, function(){
-				done();
-			});
-		});
-
-		it('has text', function(done){
-			var textToBeChecked = $('.feed .entry').text();
-			expect(textToBeChecked).not.toBe("");
-			done();
-		});
-
-		/*
-			Nested describe for checking the value of the newly loaded
-			feed.
-		*/
-		describe('Loading new feed', function(){
-			beforeEach(function(done){
+				oldText = $('.feed .entry').text();
 				loadFeed(1, function(){
 					done();
 				});
 			});
+		});
 
-			it('has different text than the original one', function(done){
-				var newText = $('.feed .entry').text();
-				expect(newText).not.toBe(textToBeChecked);
-				done();
-			});
+		it('content actually changed', function(done){
+			var newText = $('.feed .entry').text();
+			expect(newText).not.toBe(oldText);
+			done();
 		});
 	});
 }());

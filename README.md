@@ -1,6 +1,6 @@
 # How to RUN the file
-Run the file and review the specs!
-Actual specs have been commented.
+Run the *index.html* file and review the specs!
+Actual specs have been commented in *./jasmine/spec/feedreader.js* file
 
 
 
